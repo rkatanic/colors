@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import Color from "../components/Color";
-import ColorConverter from "../components/ColorConverter";
 import ColorPicker from "../components/ColorPicker";
-import { adjust } from "../util/utils";
+import HexToHSL from "../components/HexToHSL";
+import HSLToHexConverter from "../components/HexToHSLConverter";
+import { HSLToHex } from "../util/utils";
 
 const Home: NextPage = () => {
   const [hue, setHue] = useState(214);
@@ -160,7 +161,8 @@ const Home: NextPage = () => {
             color={colors[900]}
           />
         </div>
-        <ColorConverter />
+        <HexToHSL />
+        <HSLToHexConverter />
       </div>
     </div>
   );
