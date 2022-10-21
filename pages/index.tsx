@@ -2,8 +2,11 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import Color from "../components/Color";
 import ColorPicker from "../components/ColorPicker";
+import ColorsExport from "../components/ColorsExport";
 import HexToHSL from "../components/HexToHSL";
 import HSLToHexConverter from "../components/HexToHSLConverter";
+import { HSLToHex } from "../util/utils";
+import { FiRepeat } from "react-icons/fi";
 
 const Home: NextPage = () => {
   const [hue, setHue] = useState(164); // 0 - 360
@@ -16,55 +19,78 @@ const Home: NextPage = () => {
       h: hue,
       s: Math.round(saturation - saturation * 0.0833),
       l: Math.round(lightness + lightness * 1.45),
+      sDelta: -0.0833,
+      lDelta: 1.45,
     },
     100: {
       h: hue,
       s: Math.round(saturation - saturation * 0.0476),
       l: Math.round(lightness + lightness * 1.25),
+      sDelta: -0.0476,
+      lDelta: 1.25,
     },
     200: {
       h: hue,
       s: Math.round(saturation - saturation * 0.0952),
       l: Math.round(lightness + lightness * 1),
+      sDelta: -0.0952,
+      lDelta: 1,
     },
     300: {
       h: hue,
       s: Math.round(saturation - saturation * 0.145),
       l: Math.round(lightness + lightness * 0.687),
+      sDelta: -0.145,
+      lDelta: 0.687,
     },
     400: {
       h: hue,
       s: Math.round(saturation - saturation * 0.238),
       l: Math.round(lightness + lightness * 0.3),
+      sDelta: -0.238,
+      lDelta: 0.3,
     },
     500: {
       h: hue,
       s: saturation,
       l: lightness,
+      sDelta: 0,
+      lDelta: 0,
     },
     600: {
       h: hue,
       s: Math.round(saturation + saturation * 0.119),
       l: Math.round(lightness - lightness * 0.25),
+      sDelta: 0.119,
+      lDelta: -0.25,
     },
     700: {
       h: hue,
       s: Math.round(saturation + saturation * 0.125),
       l: Math.round(lightness - lightness * 0.4),
+      sDelta: 0.125,
+      lDelta: -0.4,
     },
     800: {
       h: hue,
       s: Math.round(saturation + saturation * 0.0476),
       l: Math.round(lightness - lightness * 0.5),
+      sDelta: 0.0476,
+      lDelta: -0.5,
     },
     900: {
       h: hue,
       s: Math.round(saturation + saturation * 0.0238),
       l: Math.round(lightness - lightness * 0.576),
+      sDelta: 0.0238,
+      lDelta: -0.576,
     },
   } as any);
   const setColor = (color: any): void => {
-    setColors((prevState: any) => ({ ...prevState, [selectedColor]: color }));
+    setColors((prevState: any) => ({
+      ...prevState,
+      [selectedColor]: { ...prevState[selectedColor], ...color },
+    }));
   };
 
   const selectColor = (colorNumber: number): void => {
@@ -75,7 +101,46 @@ const Home: NextPage = () => {
     setHue(h);
     setColors((prevState: any) =>
       Object.keys(prevState)
-        .map((colorKey) => ({ [colorKey]: { ...colors[colorKey], h } }))
+        .map((colorKey) => ({
+          [colorKey]: {
+            ...colors[colorKey],
+            h,
+            s: Math.round(saturation + saturation * colors[colorKey].sDelta),
+            l: Math.round(lightness + lightness * colors[colorKey].lDelta),
+          },
+        }))
+        .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
+    );
+  };
+
+  const setNewSaturation = (s: number): void => {
+    setSaturation(s);
+    setColors((prevState: any) =>
+      Object.keys(prevState)
+        .map((colorKey) => ({
+          [colorKey]: {
+            ...colors[colorKey],
+            h: hue,
+            s: Math.round(s + s * colors[colorKey].sDelta),
+            l: Math.round(lightness + lightness * colors[colorKey].lDelta),
+          },
+        }))
+        .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
+    );
+  };
+
+  const setNewLightness = (l: number): void => {
+    setLightness(l);
+    setColors((prevState: any) =>
+      Object.keys(prevState)
+        .map((colorKey) => ({
+          [colorKey]: {
+            ...colors[colorKey],
+            h: hue,
+            s: Math.round(saturation + saturation * colors[colorKey].sDelta),
+            l: Math.round(l + l * colors[colorKey].lDelta),
+          },
+        }))
         .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
     );
   };
@@ -83,15 +148,21 @@ const Home: NextPage = () => {
   const setRandomHue = (): void => {
     const hue = getRandomInt(0, 361);
     const saturation = getRandomInt(0, 89);
-    const lightness = getRandomInt(0, 40);
+    const lightness = getRandomInt(10, 40);
 
     setHue(hue);
+    setSaturation(saturation);
     setLightness(lightness);
 
     setColors((prevState: any) =>
       Object.keys(prevState)
         .map((colorKey) => ({
-          [colorKey]: { ...colors[colorKey], h: hue },
+          [colorKey]: {
+            ...colors[colorKey],
+            h: hue,
+            s: Math.round(saturation + saturation * colors[colorKey].sDelta),
+            l: Math.round(lightness + lightness * colors[colorKey].lDelta),
+          },
         }))
         .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
     );
@@ -104,37 +175,84 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-900 flex-col m-autopx-4 py-4">
-      <div className="m-auto flex flex-col items-end max-w-5xl">
-        <div className="flex items-baseline justify-between w-full">
-          <div className="text-white border border-neutral-800 rounded p-4">
-            <div>
-              <div>Palette Hue: {hue}</div>
-              <input
-                className="w-full"
-                type="range"
-                min={0}
-                max={360}
-                value={hue}
-                onChange={(e) => setNewHue(+e.target.value)}
-              />
-            </div>
-            <button
-              className="text-sm w-full mt-2 bg-neutral-700 hover:bg-neutral-700/70 p-2 rounded shadow-sm px-4"
-              type="button"
-              onClick={setRandomHue}
-            >
-              <span className="text-white font-medium">Randomize Color</span>
-            </button>
-          </div>
+    <div className="min-h-screen bg-neutral-900 flex">
+      <div className="m-auto flex flex-col max-w-6xl w-full">
+        <div className="flex gap-4 justify-between w-full mb-4">
           <ColorPicker
             selectedColor={selectedColor}
             color={colors[selectedColor]}
             setColor={setColor}
           />
+          <div className="text-white flex gap-4 items-end w-full">
+            <div className="w-full">
+              <div className="mb-2">Color Palette</div>
+              <div className="flex gap-4 items-end border border-neutral-800 rounded p-4">
+                <div className="text-sm w-full">
+                  <div className="mb-2">
+                    <div className="flex justify-between">
+                      <span className="text-neutral-500">H</span>
+                      {hue}
+                    </div>
+                    <input
+                      className="w-full"
+                      type="range"
+                      min={0}
+                      max={360}
+                      value={hue}
+                      onChange={(e) => setNewHue(+e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <div className="flex justify-between">
+                      <span className="text-neutral-500">S</span> {saturation}
+                    </div>
+                    <input
+                      className="w-full"
+                      type="range"
+                      min={0}
+                      max={100}
+                      value={saturation}
+                      onChange={(e) => setNewSaturation(+e.target.value)}
+                    />
+                  </div>
+                  <div className="mt-2">
+                    <div className="flex justify-between">
+                      <span className="text-neutral-500">L</span> {lightness}
+                    </div>
+                    <input
+                      className="w-full"
+                      type="range"
+                      min={0}
+                      max={100}
+                      value={lightness}
+                      onChange={(e) => setNewLightness(+e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="whitespace-nowrap w-full">
+                  <button
+                    className="flex items-center justify-center gap-2 text-sm w-full mb-4 bg-neutral-700 hover:bg-neutral-700/70 p-2 rounded shadow-sm px-4"
+                    type="button"
+                    onClick={setRandomHue}
+                  >
+                    <FiRepeat />
+                    <span className="text-white font-medium">
+                      Randomize Color
+                    </span>
+                  </button>
+                  <div className="font-mono text-neutral-300">
+                    <div>
+                      hsl({hue}, {saturation}%, {lightness}%)
+                    </div>
+                    <div>{HSLToHex(hue, saturation, lightness)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="flex">
+        <div className="flex w-full">
           <Color
             selectedColor={selectedColor}
             selectColor={selectColor}
@@ -196,8 +314,13 @@ const Home: NextPage = () => {
             color={colors[900]}
           />
         </div>
-        <HexToHSL />
-        <HSLToHexConverter />
+        <div className="flex items-baseline gap-4 w-full">
+          <ColorsExport colors={colors} />
+          <div>
+            <HexToHSL />
+            <HSLToHexConverter />
+          </div>
+        </div>
       </div>
     </div>
   );

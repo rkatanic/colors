@@ -40,7 +40,7 @@ const HSLToHexConverter = () => {
             }
           />
         </div>
-        <div className="mt-4 text-sm">{HSLToHex(h, s, l)}</div>
+        <div className="mt-2 text-sm">{HSLToHex(h, s, l)}</div>
       </div>
     </div>
   );
