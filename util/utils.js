@@ -38,22 +38,7 @@ export const hexToHSL = (H) => {
     l = Math.round(+(l * 100).toFixed(1));
   
     return { h, s, l };
-  };
-  
-  export const adjust = (color, amount) => {
-    return (
-      "#" +
-      color
-        .replace(/^#/, "")
-        .replace(/../g, (color) =>
-          (
-            "0" +
-            Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
-          ).substr(-2)
-        )
-    );
-  };
-  
+  };  
 
   export const HSLToHex =(h,s,l) =>{
     s /= 100;
@@ -94,3 +79,10 @@ export const hexToHSL = (H) => {
   
     return "#" + r + g + b;
   }
+
+  
+  export const getRandomInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  };

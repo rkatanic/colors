@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HSLToHex } from "../util/utils";
+import ColorCopy from "./ColorCopy";
 
 const HSLToHexConverter = () => {
   const [{ h, s, l }, setHsl] = useState({ h: 0, s: 0, l: 0 });
@@ -8,7 +9,7 @@ const HSLToHexConverter = () => {
     <div className="text-white mt-4">
       <div className="mb-2">HSL To Hex</div>
       <div className="border border-neutral-800 rounded p-4">
-        <div className="flex gap-2">
+        <div className="flex gap-2 mb-2">
           <input
             type="number"
             min={0}
@@ -40,7 +41,7 @@ const HSLToHexConverter = () => {
             }
           />
         </div>
-        <div className="mt-2 text-sm">{HSLToHex(h, s, l)}</div>
+        <ColorCopy color={HSLToHex(h, s, l)} />
       </div>
     </div>
   );

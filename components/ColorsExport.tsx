@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { HSLToHex } from "../util/utils";
 
 interface Props {
   colors: any;
@@ -22,6 +23,7 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
       <div className="flex">
         {TABS.map((tab) => (
           <div
+            key={tab}
             onClick={() => setActiveTab(tab)}
             className={`cursor-pointer p-2 px-4 -mb-[1px] ${
               activeTab === tab
@@ -34,11 +36,47 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
         ))}
       </div>
       <div className="border border-neutral-800 p-4 rounded-md rounded-tl-none">
-        {colorShades.map((colorShade) => (
-          <div className="font-mono text-sm text-neutral-300 ">
-            hsl({colorShade.h}, {colorShade.s}%, {colorShade.l}%)
-          </div>
-        ))}
+        {activeTab === TABS[0] &&
+          colorShades.map((colorShade, i) => (
+            <div key={i} className="font-mono text-sm text-neutral-300 ">
+              hsl({colorShade.h}, {colorShade.s}%, {colorShade.l}%)
+            </div>
+          ))}
+        {activeTab === TABS[1] &&
+          colorShades.map((colorShade, i) => (
+            <div key={i} className="font-mono text-sm text-neutral-300 ">
+              {HSLToHex(colorShade.h, colorShade.s, colorShade.l)}
+            </div>
+          ))}
+        {activeTab === TABS[2] &&
+          colorShades.map((colorShade, i) => (
+            <div key={i} className="font-mono text-sm text-neutral-300 ">
+              --color-{Object.keys(colors)[i]}: hsl({colorShade.h},{" "}
+              {colorShade.s}%, {colorShade.l}%);
+            </div>
+          ))}
+        {activeTab === TABS[3] &&
+          colorShades.map((colorShade, i) => (
+            <div key={i} className="font-mono text-sm text-neutral-300 ">
+              --color-{Object.keys(colors)[i]}:{" "}
+              {HSLToHex(colorShade.h, colorShade.s, colorShade.l)};
+            </div>
+          ))}
+        {activeTab === TABS[4] &&
+          colorShades.map((colorShade, i) => (
+            <div key={i} className="font-mono text-sm text-neutral-300 ">
+              $color-{Object.keys(colors)[i]}: hsl({colorShade.h},{" "}
+              {colorShade.s}%, {colorShade.l}%);
+            </div>
+          ))}
+
+        {activeTab === TABS[5] &&
+          colorShades.map((colorShade, i) => (
+            <div key={i} className="font-mono text-sm text-neutral-300 ">
+              $color-{Object.keys(colors)[i]}:{" "}
+              {HSLToHex(colorShade.h, colorShade.s, colorShade.l)};
+            </div>
+          ))}
       </div>
     </div>
   );

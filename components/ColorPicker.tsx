@@ -1,4 +1,5 @@
 import { hexToHSL, HSLToHex } from "../util/utils";
+import ColorCopy from "./ColorCopy";
 
 interface Props {
   color: { h: number; s: number; l: number };
@@ -72,11 +73,9 @@ const ColorPicker = ({
             style={{ backgroundColor: `hsl(${h},${s}%,${l}%)` }}
           ></label>
         </div>
-        <div className="font-mono text-neutral-300 whitespace-nowrap w-full">
-          <div>
-            hsl({h}, {s}%, {l}%)
-          </div>
-          <div>{HSLToHex(h, s, l)}</div>
+        <div className="flex flex-col gap-1">
+          <ColorCopy color={`hsl(${h}, ${s}%, ${l}%)`} />
+          <ColorCopy color={HSLToHex(h, s, l)} />
         </div>
       </div>
     </div>

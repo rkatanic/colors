@@ -5,13 +5,14 @@ import ColorPicker from "../components/ColorPicker";
 import ColorsExport from "../components/ColorsExport";
 import HexToHSL from "../components/HexToHSL";
 import HSLToHexConverter from "../components/HexToHSLConverter";
-import { HSLToHex } from "../util/utils";
+import { getRandomInt, HSLToHex } from "../util/utils";
 import { FiRepeat } from "react-icons/fi";
+import ColorCopy from "../components/ColorCopy";
 
-const Home: NextPage = () => {
-  const [hue, setHue] = useState(164); // 0 - 360
-  const [saturation, setSaturation] = useState(84); // 0 - 89
-  const [lightness, setLightness] = useState(40); // 0 - 40
+const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any) => {
+  const [hue, setHue] = useState(HUE);
+  const [saturation, setSaturation] = useState(SATURATION);
+  const [lightness, setLightness] = useState(LIGHTNESS);
 
   const [selectedColor, setSelectedColor] = useState(500);
   const [colors, setColors] = useState({
@@ -168,12 +169,6 @@ const Home: NextPage = () => {
     );
   };
 
-  const getRandomInt = (min: number, max: number): number => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-  };
-
   return (
     <div className="min-h-screen bg-neutral-900 flex">
       <div className="m-auto flex flex-col max-w-6xl w-full">
@@ -237,14 +232,14 @@ const Home: NextPage = () => {
                   >
                     <FiRepeat />
                     <span className="text-white font-medium">
-                      Randomize Color
+                      Random Palete
                     </span>
                   </button>
-                  <div className="font-mono text-neutral-300">
-                    <div>
-                      hsl({hue}, {saturation}%, {lightness}%)
-                    </div>
-                    <div>{HSLToHex(hue, saturation, lightness)}</div>
+                  <div className="flex flex-col gap-1">
+                    <ColorCopy
+                      color={`hsl(${hue}, ${saturation}%, ${lightness}%)`}
+                    />
+                    <ColorCopy color={HSLToHex(hue, saturation, lightness)} />
                   </div>
                 </div>
               </div>
@@ -327,3 +322,12 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const HUE = getRandomInt(0, 361);
+  const SATURATION = getRandomInt(0, 89);
+  const LIGHTNESS = getRandomInt(10, 41);
+  return {
+    props: { HUE, SATURATION, LIGHTNESS },
+  };
+}
