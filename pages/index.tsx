@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Color from "../components/Color";
 import ColorPicker from "../components/ColorPicker";
 import ColorsExport from "../components/ColorsExport";
@@ -9,7 +9,7 @@ import { getRandomInt, HSLToHex } from "../util/utils";
 import { FiRepeat } from "react-icons/fi";
 import ColorCopy from "../components/ColorCopy";
 
-const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any) => {
+const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
   const [hue, setHue] = useState(HUE);
   const [saturation, setSaturation] = useState(SATURATION);
   const [lightness, setLightness] = useState(LIGHTNESS);
@@ -323,11 +323,13 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any) => {
 
 export default Home;
 
-export async function getStaticProps() {
+Home.getInitialProps = (): {
+  HUE: number;
+  SATURATION: number;
+  LIGHTNESS: number;
+} => {
   const HUE = getRandomInt(0, 361);
   const SATURATION = getRandomInt(0, 89);
   const LIGHTNESS = getRandomInt(10, 41);
-  return {
-    props: { HUE, SATURATION, LIGHTNESS },
-  };
-}
+  return { HUE, SATURATION, LIGHTNESS };
+};
