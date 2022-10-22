@@ -13,7 +13,7 @@ const ColorPicker = ({
   selectedColor,
 }: Props) => {
   return (
-    <div className="text-white w-full">
+    <div className="text-white flex-1">
       <div className="mb-2">Selected Color</div>
       <div className="flex gap-4 items-end rounded-md border border-neutral-800 p-4">
         <div className="flex flex-col text-sm w-full">
@@ -58,24 +58,26 @@ const ColorPicker = ({
             />
           </div>
         </div>
-        <div>
-          <span className="text-neutral-500 text-xs">{selectedColor}</span>
-          <input
-            id="color-picker"
-            className="sr-only"
-            type="color"
-            value={HSLToHex(h, s, l)}
-            onChange={(e) => setColor(hexToHSL(e.target.value))}
-          />
-          <label
-            htmlFor="color-picker"
-            className="block w-24 h-24"
-            style={{ backgroundColor: `hsl(${h},${s}%,${l}%)` }}
-          ></label>
-        </div>
-        <div className="flex flex-col gap-1">
-          <ColorCopy color={`hsl(${h}, ${s}%, ${l}%)`} />
-          <ColorCopy color={HSLToHex(h, s, l)} />
+        <div className="flex gap-4 w-full flex-col items-start justify-start sm:items-end sm:flex-row">
+          <div>
+            <span className="text-neutral-500 text-xs">{selectedColor}</span>
+            <input
+              id="color-picker"
+              className="sr-only"
+              type="color"
+              value={HSLToHex(h, s, l)}
+              onChange={(e) => setColor(hexToHSL(e.target.value))}
+            />
+            <label
+              htmlFor="color-picker"
+              className="block w-24 h-24"
+              style={{ backgroundColor: `hsl(${h},${s}%,${l}%)` }}
+            ></label>
+          </div>
+          <div className="flex flex-col gap-1">
+            <ColorCopy color={`hsl(${h}, ${s}%, ${l}%)`} />
+            <ColorCopy color={HSLToHex(h, s, l)} />
+          </div>
         </div>
       </div>
     </div>

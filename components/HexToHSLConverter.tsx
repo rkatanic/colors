@@ -6,7 +6,7 @@ const HSLToHexConverter = () => {
   const [{ h, s, l }, setHsl] = useState({ h: 0, s: 0, l: 0 });
 
   return (
-    <div className="text-white mt-4">
+    <div className="text-white flex-1 lg:mt-4">
       <div className="mb-2">HSL To Hex</div>
       <div className="border border-neutral-800 rounded p-4">
         <div className="flex gap-2 mb-2">

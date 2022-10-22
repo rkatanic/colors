@@ -19,33 +19,35 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
   const colorShades = Object.keys(colors).map((key) => colors[key]);
 
   return (
-    <div className="text-white w-full">
-      <div className="flex">
+    <div className="text-white w-full mt-4 lg:mt-0">
+      <div className="flex whitespace-nowrap overflow-x-auto overflow-y-hidden">
         {TABS.map((tab) => (
           <div
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`cursor-pointer p-2 px-4 -mb-[1px] ${
+            className={`cursor-pointer p-2 px-4 -mb-[1px] border z-10 ${
               activeTab === tab
-                ? "border border-b-neutral-900 rounded-t-md bg-neutral-900 border-neutral-800 text-white"
-                : "border border-transparent text-neutral-500"
+                ? "rounded-t-lg bg-neutral-900 border-neutral-800 border-b-transparent text-white"
+                : "border-transparent text-neutral-500"
             }`}
           >
             {tab}
           </div>
         ))}
       </div>
-      <div className="border border-neutral-800 p-4 rounded-md rounded-tl-none">
+      <div className="border border-neutral-800 p-4 rounded-md rounded-tl-none relative">
         {activeTab === TABS[0] &&
           colorShades.map((colorShade, i) => (
             <div key={i} className="font-mono text-sm text-neutral-300 ">
               hsl({colorShade.h}, {colorShade.s}%, {colorShade.l}%)
+              {i !== 9 && ","}
             </div>
           ))}
         {activeTab === TABS[1] &&
           colorShades.map((colorShade, i) => (
             <div key={i} className="font-mono text-sm text-neutral-300 ">
               {HSLToHex(colorShade.h, colorShade.s, colorShade.l)}
+              {i !== 9 && ","}
             </div>
           ))}
         {activeTab === TABS[2] &&

@@ -18,7 +18,7 @@ const Color = ({
     >
       <span className="text-neutral-500 mb-1 text-xs">{shade}</span>
       <div
-        className="h-24"
+        className="h-16 md:h-24"
         style={{ backgroundColor: `hsl(${h},${s}%,${l}%)` }}
       ></div>
       <div

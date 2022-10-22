@@ -170,15 +170,15 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any) => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-900 flex">
+    <div className="min-h-screen bg-neutral-900 flex p-4">
       <div className="m-auto flex flex-col max-w-6xl w-full">
-        <div className="flex gap-4 justify-between w-full mb-4">
+        <div className="flex flex-col gap-4 justify-between w-full mb-4 flex-wrap lg:flex-row">
           <ColorPicker
             selectedColor={selectedColor}
             color={colors[selectedColor]}
             setColor={setColor}
           />
-          <div className="text-white flex gap-4 items-end w-full">
+          <div className="text-white flex gap-4 items-end flex-1">
             <div className="w-full">
               <div className="mb-2">Color Palette</div>
               <div className="flex gap-4 items-end border border-neutral-800 rounded p-4">
@@ -247,7 +247,7 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any) => {
           </div>
         </div>
 
-        <div className="flex w-full">
+        <div className="flex flex-col w-full md:flex-row">
           <Color
             selectedColor={selectedColor}
             selectColor={selectColor}
@@ -309,9 +309,9 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any) => {
             color={colors[900]}
           />
         </div>
-        <div className="flex items-baseline gap-4 w-full">
+        <div className="flex flex-col items-baseline gap-4 w-full lg:flex-row">
           <ColorsExport colors={colors} />
-          <div>
+          <div className="w-full flex gap-4 items-baseline flex-wrap lg:block lg:w-auto">
             <HexToHSL />
             <HSLToHexConverter />
           </div>
