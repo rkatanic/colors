@@ -106,12 +106,26 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
           [colorKey]: {
             ...colors[colorKey],
             h,
-            s: Math.round(saturation + saturation * colors[colorKey].sDelta),
-            l: Math.round(lightness + lightness * colors[colorKey].lDelta),
+            s:
+              getNewSaturationValue(colorKey) < 100
+                ? getNewSaturationValue(colorKey)
+                : 100,
+            l:
+              getNewLightnessValue(colorKey) < 100
+                ? getNewLightnessValue(colorKey)
+                : 100,
           },
         }))
         .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
     );
+
+    function getNewLightnessValue(colorKey: string) {
+      return Math.round(lightness + lightness * colors[colorKey].lDelta);
+    }
+
+    function getNewSaturationValue(colorKey: string) {
+      return Math.round(saturation + saturation * colors[colorKey].sDelta);
+    }
   };
 
   const setNewSaturation = (s: number): void => {
@@ -122,12 +136,26 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
           [colorKey]: {
             ...colors[colorKey],
             h: hue,
-            s: Math.round(s + s * colors[colorKey].sDelta),
-            l: Math.round(lightness + lightness * colors[colorKey].lDelta),
+            s:
+              getNewSaturationValue(colorKey) < 100
+                ? getNewSaturationValue(colorKey)
+                : 100,
+            l:
+              getNewLightnessValue(colorKey) < 100
+                ? getNewLightnessValue(colorKey)
+                : 100,
           },
         }))
         .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
     );
+
+    function getNewLightnessValue(colorKey: string) {
+      return Math.round(lightness + lightness * colors[colorKey].lDelta);
+    }
+
+    function getNewSaturationValue(colorKey: string) {
+      return Math.round(s + s * colors[colorKey].sDelta);
+    }
   };
 
   const setNewLightness = (l: number): void => {
@@ -138,12 +166,26 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
           [colorKey]: {
             ...colors[colorKey],
             h: hue,
-            s: Math.round(saturation + saturation * colors[colorKey].sDelta),
-            l: Math.round(l + l * colors[colorKey].lDelta),
+            s:
+              getNewSaturationValue(colorKey) < 100
+                ? getNewSaturationValue(colorKey)
+                : 100,
+            l:
+              getNewLightnessValue(colorKey) < 100
+                ? getNewLightnessValue(colorKey)
+                : 100,
           },
         }))
         .reduce((acc, currentColor) => ({ ...acc, ...currentColor }), {})
     );
+
+    function getNewSaturationValue(colorKey: string) {
+      return Math.round(saturation + saturation * colors[colorKey].sDelta);
+    }
+
+    function getNewLightnessValue(colorKey: string) {
+      return Math.round(l + l * colors[colorKey].lDelta);
+    }
   };
 
   const setRandomHue = (): void => {
