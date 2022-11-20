@@ -1,50 +1,26 @@
 import { useState } from "react";
-import { HSLToHex } from "../util/utils";
+import { hexToHSL } from "../util/utils";
 import ColorCopy from "./ColorCopy";
 
-const HSLToHexConverter = () => {
-  const [{ h, s, l }, setHsl] = useState({ h: 0, s: 0, l: 0 });
+const HexToHslConverter = () => {
+  const [hex, setHex] = useState("");
+  const hsl = hexToHSL(hex);
 
   return (
-    <div className="text-white flex-1 lg:mt-4">
-      <div className="mb-2">HSL To Hex</div>
-      <div className="border border-neutral-800 rounded p-4">
-        <div className="flex gap-2 mb-2">
-          <input
-            type="number"
-            min={0}
-            max={360}
-            value={h}
-            className="border-0 bg-neutral-800 rounded p-1.5 px-2 text-sm w-16"
-            onChange={(e) =>
-              setHsl((prevState) => ({ ...prevState, h: +e.target.value }))
-            }
-          />
-          <input
-            type="number"
-            min={0}
-            max={100}
-            value={s}
-            className="border-0 bg-neutral-800 rounded p-1.5 px-2 text-sm w-16"
-            onChange={(e) =>
-              setHsl((prevState) => ({ ...prevState, s: +e.target.value }))
-            }
-          />
-          <input
-            type="number"
-            min={0}
-            max={100}
-            value={l}
-            className="border-0 bg-neutral-800 rounded p-1.5 px-2 text-sm w-16"
-            onChange={(e) =>
-              setHsl((prevState) => ({ ...prevState, l: +e.target.value }))
-            }
-          />
-        </div>
-        <ColorCopy color={HSLToHex(h, s, l)} />
+    <div className="text-white flex-1 lg:mt-8">
+      <div className="mb-2">Hex To HSL</div>
+      <div className="p-4 border border-neutral-800 rounded text-sm mb-1">
+        <input
+          onChange={(e) => setHex(e.target.value)}
+          type="text"
+          value={hex}
+          placeholder="eg. #171717"
+          className="w-full mb-2 bg-neutral-800 border-0 border p-1.5 px-2 rounded placeholder:text-neutral-500"
+        />
+        <ColorCopy color={`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`} />
       </div>
     </div>
   );
 };
 
-export default HSLToHexConverter;
+export default HexToHslConverter;

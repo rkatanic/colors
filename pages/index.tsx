@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Color from "../components/Color";
 import ColorPicker from "../components/ColorPicker";
 import ColorsExport from "../components/ColorsExport";
-import HexToHSL from "../components/HexToHSL";
-import HSLToHexConverter from "../components/HexToHSLConverter";
 import { getRandomInt, HSLToHex } from "../util/utils";
 import { FiRepeat } from "react-icons/fi";
 import ColorCopy from "../components/ColorCopy";
+import HexToHslConverter from "../components/HexToHSLConverter";
+import HSLToHexConverter from "../components/HslToHexConverter";
 
 const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
   const [hue, setHue] = useState(HUE);
@@ -312,7 +312,7 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
         <div className="flex flex-col items-baseline gap-4 w-full lg:flex-row">
           <ColorsExport colors={colors} />
           <div className="w-full flex gap-4 items-baseline flex-wrap lg:block lg:w-auto">
-            <HexToHSL />
+            <HexToHslConverter />
             <HSLToHexConverter />
           </div>
         </div>

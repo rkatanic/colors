@@ -40,7 +40,8 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
           colorShades.map((colorShade, i) => (
             <div key={i} className="font-mono text-sm text-neutral-300 ">
               <span className="text-neutral-500">{Object.keys(colors)[i]}</span>{" "}
-              : "hsl({colorShade.h}, {colorShade.s}%, {colorShade.l}%)"
+              : &quot;hsl({colorShade.h}, {colorShade.s}%, {colorShade.l}
+              %)&quot;
               {i !== 9 && ","}
             </div>
           ))}
@@ -48,7 +49,7 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
           colorShades.map((colorShade, i) => (
             <div key={i} className="font-mono text-sm text-neutral-300 ">
               <span className="text-neutral-500">{Object.keys(colors)[i]}</span>{" "}
-              : {HSLToHex(colorShade.h, colorShade.s, colorShade.l)}"
+              : &quot;{HSLToHex(colorShade.h, colorShade.s, colorShade.l)}&quot;
               {i !== 9 && ","}
             </div>
           ))}
