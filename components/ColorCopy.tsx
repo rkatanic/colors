@@ -16,7 +16,7 @@ const ColorCopy = ({ color }: Props): JSX.Element => {
 
   return (
     <div className="flex items-center gap-2.5">
-      <span className="text-sm text-neutral-300 font-mono whitespace-nowrap">
+      <span className="whitespace-nowrap font-mono text-sm text-gray-300">
         {color}
       </span>
 
@@ -26,7 +26,7 @@ const ColorCopy = ({ color }: Props): JSX.Element => {
         ) : (
           <FiCopy
             size="0.75rem"
-            className="stroke-neutral-400 hover:stroke-white"
+            className="stroke-gray-400 hover:stroke-white"
           />
         )}
       </button>

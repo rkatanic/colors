@@ -4,10 +4,10 @@ import Color from "../components/Color";
 import ColorPicker from "../components/ColorPicker";
 import ColorsExport from "../components/ColorsExport";
 import { getRandomInt, HSLToHex } from "../util/utils";
-import { FiRepeat } from "react-icons/fi";
+import { FaRandom } from "react-icons/fa";
 import ColorCopy from "../components/ColorCopy";
-import HexToHslConverter from "../components/HexToHSLConverter";
 import HSLToHexConverter from "../components/HslToHexConverter";
+import HexToHslConverter from "../components/HexToHslConverter";
 
 const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
   const [hue, setHue] = useState(HUE);
@@ -212,76 +212,79 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-900 flex p-4">
-      <div className="m-auto flex flex-col max-w-6xl w-full">
-        <div className="flex flex-col gap-4 justify-between w-full mb-4 flex-wrap lg:flex-row">
+    <div className="relative flex min-h-screen p-4">
+      <div className="m-auto flex w-full max-w-6xl flex-col">
+        <div className="mb-4 flex w-full flex-col flex-wrap justify-between gap-4 lg:flex-row">
           <ColorPicker
             selectedColor={selectedColor}
             color={colors[selectedColor]}
             setColor={setColor}
           />
-          <div className="text-white flex gap-4 items-end flex-1">
+          <div className="flex flex-1 items-end gap-4 bg-gray-900 text-gray-200">
             <div className="w-full">
-              <div className="mb-2">Color Palette</div>
-              <div className="flex gap-4 items-end border border-neutral-800 rounded p-4">
-                <div className="text-sm w-full">
-                  <div className="mb-2">
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">H</span>
-                      {hue}
-                    </div>
-                    <input
-                      className="w-full"
-                      type="range"
-                      min={0}
-                      max={360}
-                      value={hue}
-                      onChange={(e) => setNewHue(+e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">S</span> {saturation}
-                    </div>
-                    <input
-                      className="w-full"
-                      type="range"
-                      min={0}
-                      max={100}
-                      value={saturation}
-                      onChange={(e) => setNewSaturation(+e.target.value)}
-                    />
-                  </div>
-                  <div className="mt-2">
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">L</span> {lightness}
-                    </div>
-                    <input
-                      className="w-full"
-                      type="range"
-                      min={0}
-                      max={100}
-                      value={lightness}
-                      onChange={(e) => setNewLightness(+e.target.value)}
-                    />
-                  </div>
+              <div className="border-2 border-gray-800">
+                <div className="border-b-2 border-gray-800 p-4 text-lg font-medium tracking-wide text-gray-200">
+                  Color Palette
                 </div>
-                <div className="whitespace-nowrap w-full">
-                  <button
-                    className="flex items-center justify-center gap-2 text-sm w-full mb-4 bg-neutral-700 hover:bg-neutral-700/70 p-2 rounded shadow-sm px-4"
-                    type="button"
-                    onClick={setRandomHue}
-                  >
-                    <FiRepeat />
-                    <span className="text-white font-medium">
-                      Random Palete
-                    </span>
-                  </button>
-                  <div className="flex flex-col gap-1">
-                    <ColorCopy
-                      color={`hsl(${hue}, ${saturation}%, ${lightness}%)`}
-                    />
-                    <ColorCopy color={HSLToHex(hue, saturation, lightness)} />
+
+                <div className="flex items-end gap-4 p-4">
+                  <div className="w-full text-sm">
+                    <div className="mb-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">H</span>
+                        {hue}
+                      </div>
+                      <input
+                        className="w-full"
+                        type="range"
+                        min={0}
+                        max={360}
+                        value={hue}
+                        onChange={(e) => setNewHue(+e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">S</span> {saturation}
+                      </div>
+                      <input
+                        className="w-full"
+                        type="range"
+                        min={0}
+                        max={100}
+                        value={saturation}
+                        onChange={(e) => setNewSaturation(+e.target.value)}
+                      />
+                    </div>
+                    <div className="mt-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">L</span> {lightness}
+                      </div>
+                      <input
+                        className="w-full"
+                        type="range"
+                        min={0}
+                        max={100}
+                        value={lightness}
+                        onChange={(e) => setNewLightness(+e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full whitespace-nowrap">
+                    <button
+                      className="mb-8 flex items-center justify-center gap-3 rounded-full border-2 border-gray-200 bg-gray-900 p-2 px-6 text-sm font-medium uppercase tracking-wider text-gray-200 shadow-sm hover:bg-gray-800/50"
+                      type="button"
+                      onClick={setRandomHue}
+                    >
+                      <FaRandom />
+                      Randomize
+                    </button>
+                    <div className="flex flex-col gap-1">
+                      <ColorCopy
+                        color={`hsl(${hue}, ${saturation}%, ${lightness}%)`}
+                      />
+                      <ColorCopy color={HSLToHex(hue, saturation, lightness)} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -289,7 +292,7 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
           </div>
         </div>
 
-        <div className="flex flex-col w-full md:flex-row">
+        <div className="flex w-full flex-col md:flex-row">
           <Color
             selectedColor={selectedColor}
             selectColor={selectColor}
@@ -351,9 +354,9 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
             color={colors[900]}
           />
         </div>
-        <div className="flex flex-col items-baseline gap-4 w-full lg:flex-row">
+        <div className="mt-4 flex w-full flex-col gap-4 lg:flex-row">
           <ColorsExport colors={colors} />
-          <div className="w-full flex gap-4 items-baseline flex-wrap lg:block lg:w-auto">
+          <div className="flex w-full flex-wrap items-baseline gap-4 lg:block lg:w-auto">
             <HexToHslConverter />
             <HSLToHexConverter />
           </div>

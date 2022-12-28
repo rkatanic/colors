@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    font-family: Inter, system-ui, sans-serif;
+    font-family: IBM Plex Sans, system-ui, sans-serif;
   }
 }
 
@@ -27,7 +27,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: -5.5px; /* Centers thumb on the track */
-  background-color: hsl(0, 0%, 100%);
+  background-color: hsl(214, 50%, 96%);
   height: 0.75rem;
   width: 0.75rem;
   border-radius: 50%;
@@ -36,7 +36,7 @@ input[type="range"]::-webkit-slider-thumb {
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
   border-radius: 2rem;
-  background: hsl(0, 0%, 25%);
+  background: hsl(214, 8%, 25%);
   height: 0.125rem;
 }
 
@@ -45,4 +45,15 @@ input[type="range"]::-moz-range-track {
   border-radius: 2rem;
   background: hsl(0, 0%, 25%);
   height: 0.125rem;
+}
+
+.dots {
+  background-image: radial-gradient(hsl(214, 8%, 20%) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  background-position: 0rem 2rem;
+}
+.grid-lines {
+  background-image: linear-gradient(hsl(214, 8%, 12.25%) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(214, 8%, 12.25%) 1px, transparent 1px);
+  background-size: 0.5rem 0.5rem;
 }
