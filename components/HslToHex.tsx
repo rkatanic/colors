@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { HSLToHex } from "../util/utils";
+import { convertHSLToHex } from "../util/utils";
 import ColorCopy from "./ColorCopy";
 
-const HSLToHexConverter = () => {
+const HSLToHex = (): JSX.Element => {
   const [{ h, s, l }, setHsl] = useState({ h: 0, s: 0, l: 0 });
 
   return (
-    <div className="flex-1 bg-gray-900 bg-gray-900 text-gray-200 lg:mt-4">
+    <div className="flex-1 bg-gray-900 text-gray-200 lg:mt-4">
       <div className="border-2 border-gray-800">
         <div className="border-b-2 border-gray-800 p-4 text-lg font-medium tracking-wide text-gray-200">
           HSL To Hex
@@ -44,11 +44,11 @@ const HSLToHexConverter = () => {
               }
             />
           </div>
-          <ColorCopy color={HSLToHex(h, s, l)} />
+          <ColorCopy color={convertHSLToHex(h, s, l)} />
         </div>
       </div>
     </div>
   );
 };
 
-export default HSLToHexConverter;
+export default HSLToHex;

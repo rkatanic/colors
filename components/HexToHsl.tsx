@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { hexToHSL } from "../util/utils";
+import { convertHexToHSL } from "../util/utils";
 import ColorCopy from "./ColorCopy";
 
-const HexToHslConverter = () => {
+const HexToHsl = (): JSX.Element => {
   const [hex, setHex] = useState("");
-  const hsl = hexToHSL(hex);
+  const hsl = convertHexToHSL(hex);
 
   return (
     <div className="flex-1 bg-gray-900 text-gray-200">
@@ -27,4 +27,4 @@ const HexToHslConverter = () => {
   );
 };
 
-export default HexToHslConverter;
+export default HexToHsl;

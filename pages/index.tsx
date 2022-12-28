@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Color from "../components/Color";
 import ColorPicker from "../components/ColorPicker";
 import ColorsExport from "../components/ColorsExport";
-import { getRandomInt, HSLToHex } from "../util/utils";
+import { getRandomInt, convertHSLToHex } from "../util/utils";
 import { FaRandom } from "react-icons/fa";
 import ColorCopy from "../components/ColorCopy";
-import HSLToHexConverter from "../components/HslToHexConverter";
-import HexToHslConverter from "../components/HexToHslConverter";
+import HexToHsl from "../components/HexToHsl";
+import HSLToHex from "../components/HslToHex";
 
 const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
   const [hue, setHue] = useState(HUE);
@@ -283,7 +283,9 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
                       <ColorCopy
                         color={`hsl(${hue}, ${saturation}%, ${lightness}%)`}
                       />
-                      <ColorCopy color={HSLToHex(hue, saturation, lightness)} />
+                      <ColorCopy
+                        color={convertHSLToHex(hue, saturation, lightness)}
+                      />
                     </div>
                   </div>
                 </div>
@@ -357,8 +359,8 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
         <div className="mt-4 flex w-full flex-col gap-4 lg:flex-row">
           <ColorsExport colors={colors} />
           <div className="flex w-full flex-wrap items-baseline gap-4 lg:block lg:w-auto">
-            <HexToHslConverter />
-            <HSLToHexConverter />
+            <HexToHsl />
+            <HSLToHex />
           </div>
         </div>
       </div>

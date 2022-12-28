@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HSLToHex } from "../util/utils";
+import { convertHSLToHex } from "../util/utils";
 
 interface Props {
   colors: any;
@@ -49,7 +49,8 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
           colorShades.map((colorShade, i) => (
             <div key={i} className="font-mono text-gray-300 ">
               <span className="text-gray-500">{Object.keys(colors)[i]}</span> :
-              &quot;{HSLToHex(colorShade.h, colorShade.s, colorShade.l)}&quot;
+              &quot;{convertHSLToHex(colorShade.h, colorShade.s, colorShade.l)}
+              &quot;
               {i !== 9 && ","}
             </div>
           ))}
@@ -68,7 +69,7 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
               <span className="text-gray-500">
                 --color-{Object.keys(colors)[i]}
               </span>
-              : {HSLToHex(colorShade.h, colorShade.s, colorShade.l)};
+              : {convertHSLToHex(colorShade.h, colorShade.s, colorShade.l)};
             </div>
           ))}
         {activeTab === TABS[4] &&
@@ -87,7 +88,7 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
               <span className="text-gray-500">
                 $color-{Object.keys(colors)[i]}
               </span>
-              : {HSLToHex(colorShade.h, colorShade.s, colorShade.l)};
+              : {convertHSLToHex(colorShade.h, colorShade.s, colorShade.l)};
             </div>
           ))}
       </div>
