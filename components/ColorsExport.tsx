@@ -19,7 +19,7 @@ const ColorsExport = ({ colors }: Props): JSX.Element => {
   const colorShades = Object.keys(colors).map((key) => colors[key]);
 
   return (
-    <div className="mt-4 w-full border-2 border-gray-800 bg-gray-900 text-white lg:mt-0">
+    <div className="mt-4 w-full border-2 border-gray-800 bg-black text-white lg:mt-0">
       <div className="flex overflow-x-auto whitespace-nowrap border-b-2 border-gray-800 py-4">
         {TABS.map((tab) => (
           <div

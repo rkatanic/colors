@@ -220,7 +220,7 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
             color={colors[selectedColor]}
             setColor={setColor}
           />
-          <div className="flex flex-1 items-end gap-4 bg-gray-900 text-gray-200">
+          <div className="flex flex-1 items-end gap-4 bg-black text-gray-200">
             <div className="w-full">
               <div className="border-2 border-gray-800">
                 <div className="border-b-2 border-gray-800 p-4 text-lg font-medium tracking-wide text-gray-200">
@@ -272,7 +272,7 @@ const Home: NextPage = ({ HUE, SATURATION, LIGHTNESS }: any): JSX.Element => {
                   </div>
                   <div className="w-full whitespace-nowrap">
                     <button
-                      className="mb-8 flex items-center justify-center gap-3 rounded-full border-2 border-gray-200 bg-gray-900 p-2 px-6 text-sm font-medium uppercase tracking-wider text-gray-200 shadow-sm hover:bg-gray-800/50"
+                      className="mb-8 flex items-center justify-center gap-3 rounded-full border-2 border-gray-200 bg-black p-2 px-6 text-sm font-medium uppercase tracking-wider text-gray-200 shadow-sm hover:bg-gray-800/50"
                       type="button"
                       onClick={setRandomHue}
                     >

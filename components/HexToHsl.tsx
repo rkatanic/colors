@@ -7,7 +7,7 @@ const HexToHsl = (): JSX.Element => {
   const hsl = convertHexToHSL(hex);
 
   return (
-    <div className="flex-1 bg-gray-900 text-gray-200">
+    <div className="flex-1 bg-black text-gray-200">
       <div className="mb-1 border-2  border-gray-800 text-sm">
         <div className="border-b-2 border-gray-800 p-4 text-lg font-medium tracking-wide text-gray-200">
           Hex To HSL
@@ -18,7 +18,7 @@ const HexToHsl = (): JSX.Element => {
             type="text"
             value={hex}
             placeholder="eg. #171717"
-            className="mb-2 w-full border-2 border-gray-800 bg-gray-800/20 p-2 outline-0 placeholder:text-gray-400 focus:border-gray-400"
+            className="mb-2 w-full border-2 border-gray-800 bg-black p-2 outline-0 placeholder:text-gray-400 focus:border-gray-400"
           />
           <ColorCopy color={`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`} />
         </div>

@@ -12,7 +12,7 @@ const ColorPicker = ({
   setColor,
   selectedColor,
 }: Props): JSX.Element => (
-  <div className="flex-1 bg-gray-900 text-gray-200">
+  <div className="flex-1 bg-black text-gray-200">
     <div className="fxlex items-end gap-4  border-2 border-gray-800">
       <div className="border-b-2 border-gray-800 p-4 text-lg font-medium tracking-wide text-gray-200">
         Color Shade - {selectedColor}
